@@ -6,6 +6,7 @@ from sbbrowser import SubjectsBrowser
 from grades import GradeCalculator, Grade
 from functools import partial 
 
+# Main graphical interface
 class INSAGrade(wx.Frame):
     def __init__(self):
         wx.Frame.__init__(self, None, style=wx.DEFAULT_FRAME_STYLE,
@@ -23,6 +24,7 @@ class INSAGrade(wx.Frame):
         self.Centre()
         self.Show()
 
+# Shows input to enter school's credentials
 class PanelLogin(wx.Panel):
     def __init__(self, parent):
         wx.Panel.__init__(self, parent)
@@ -47,7 +49,8 @@ class PanelLogin(wx.Panel):
         self.parent.panelGrades.initUI(self.tc_u.GetValue(), self.tc_p.GetValue())
         self.parent.panelGrades.Show()
         self.parent.Layout()
-        
+
+# Shows list of subjects and grade inputs
 class PanelGrades(wx.Panel):
     def __init__(self, parent):
         wx.Panel.__init__(self, parent)
@@ -66,17 +69,18 @@ class PanelGrades(wx.Panel):
                     self.mainList.append([ tc, subjectCoeff ])
                 self.bva = wx.Button(self, pos=(120, 30+30*len(subjects)), label='Calculate grade', size=(150, 25))
                 self.bva.Bind(wx.EVT_BUTTON, self.calculateGrade)
-            else:
+            else: # Empty username or password
                 wx.MessageBox('Please enter a valid username/password', 'Info', wx.OK | wx.ICON_INFORMATION)
                 self.showPanelLogin()
-        except AttributeError:
+        except AttributeError: # Wrong username or password
             wx.MessageBox('Wrong username/password', 'Info', wx.OK | wx.ICON_INFORMATION)
             self.showPanelLogin()
 
+    # Calculates final grade on button click
     def calculateGrade(self, event):
-        valuesList = [(ml[0].GetValue(), ml[1]) for ml in self.mainList] # getting values from textControls
-        floatList  = [(float(ml[0]),float(ml[1])) for ml in valuesList if ml[0]] # converting to (float, float)
-        gradeCalculator = GradeCalculator(floatList)
+        valuesList = [(ml[0].GetValue(), ml[1]) for ml in self.mainList] # gettings values list from inputs
+        gradesList  = [Grade(float(ml[0]),float(ml[1])) for ml in valuesList if ml[0]] # converting to grades list
+        gradeCalculator = GradeCalculator(gradesList)
         wx.MessageBox(str(gradeCalculator.getFinalGrade()), 'Your grade', wx.OK | wx.ICON_INFORMATION)
 
 

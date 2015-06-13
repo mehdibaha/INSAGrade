@@ -3,10 +3,10 @@
 
 from __future__ import division
 
+# Calculates grade either by adding the Grade object one by one,
+# or by giving a list of the form : [(grade0, coeff0), (...,...)]
 class Grade(object):
 	"""docstring for Grade"""
-	_grade = 0 # TE REMOOOOVE !!!!!
-	_coeff = 0
 	def __init__(self, grade, coeff):
 		super(Grade, self).__init__()
 		self._grade = grade
@@ -16,14 +16,13 @@ class GradeCalculator(object):
 	"""docstring for GradeCalculator"""
 	def __init__(self):
 		super(GradeCalculator, self).__init__()
-	def __init__(self, mainList):
+	def __init__(self, gradesList):
 		super(GradeCalculator, self).__init__()
 		self._gradesSum = 0
 		self._coeffsSum = 0
-		if(len(mainList) > 0):
-			# LIST [(gradei, coeffi), (...,...)]
-			self._gradesSum  = sum([g*c for (g,c) in mainList])
-			self._coeffsSum  = sum(zip(*mainList)[1])
+		if(len(gradesList) > 0):
+			self._gradesSum  = sum([g*c for (g,c) in gradesList])
+			self._coeffsSum  = sum(zip(*gradesList)[1])
 	def addGrade(self, grade):
 		self._coeffsSum += grade._coeff
 		self._gradesSum += grade._grade*grade._coeff

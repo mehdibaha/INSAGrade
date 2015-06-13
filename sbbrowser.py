@@ -5,6 +5,7 @@ import mechanize
 from bs4 import BeautifulSoup
 from getpass import getpass
 
+# Retrieves the subjects from the school's website by doing various tasks
 class SubjectsBrowser(object):
 	"""docstring for SubjectsBrowser"""
 
@@ -17,6 +18,7 @@ class SubjectsBrowser(object):
 		self._username = username
 		self._password = password
 
+	# Login with username and password to website
 	def login(self):
 		self._browser.open(self._loginURL)
 		self._browser.select_form(nr=0)
@@ -24,6 +26,7 @@ class SubjectsBrowser(object):
 		self._browser.form['password'] = self._password
 		self._browser.submit()
 
+	# Parse html to get subjects lists
 	def listFromHtml(self, result):
 		data = []
 		soup = BeautifulSoup(result)
@@ -38,6 +41,7 @@ class SubjectsBrowser(object):
 				data.append([ele for ele in [cols[0], cols[1]] if ele]) # No empty elements.
 		return tuple(data)
 
+	# Login, browse, then updates subjects
 	def retrieveSubjects(self):
 		self.login()
 		self._browser.open(self._subjectsURL)
