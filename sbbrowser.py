@@ -8,13 +8,14 @@ from getpass import getpass
 # Retrieves the subjects from the school's website by doing various tasks
 class SubjectsBrowser(object):
 	"""docstring for SubjectsBrowser"""
-
-	def __init__(self, username, password):
-		super(SubjectsBrowser, self).__init__()
+	def __init__(self):
 		self._subjects = ()
 		self._loginURL = 'https://login.insa-lyon.fr/cas/login'
 		self._subjectsURL = 'http://cipcnet.insa-lyon.fr/scol/cours_eleve'
 		self._browser = mechanize.Browser()
+
+	# Sets username and password to login
+	def setUserAndPass(self, username, password):
 		self._username = username
 		self._password = password
 
@@ -48,6 +49,7 @@ class SubjectsBrowser(object):
 		result = self._browser.response().read().decode('ascii', 'ignore') # Decoding result (to unicode)
 		self._subjects = self.listFromHtml(result)
 
+	# Returns list of subjects
 	def getSubjects(self):
 		self.retrieveSubjects()
 		return self._subjects

@@ -60,7 +60,8 @@ class PanelGrades(wx.Panel):
     def initUI(self, username, password):
         try:
             if(username != "" and password != ""):
-                subjectsBrowser = SubjectsBrowser(username, password)
+                subjectsBrowser = SubjectsBrowser()
+                subjectsBrowser.setUserAndPass(username, password)
                 subjects = subjectsBrowser.getSubjects()
                 for i,s in enumerate(subjects): # DO LIT OF TEXTCTRL
                     subjectName, subjectCoeff = s[0], s[1]
@@ -79,10 +80,10 @@ class PanelGrades(wx.Panel):
     # Calculates final grade on button click
     def calculateGrade(self, event):
         valuesList = [(ml[0].GetValue(), ml[1]) for ml in self.mainList] # gettings values list from inputs
-        gradesList  = [Grade(float(ml[0]),float(ml[1])) for ml in valuesList if ml[0]] # converting to grades list
-        gradeCalculator = GradeCalculator(gradesList)
+        gradesList  = [(float(ml[0]),float(ml[1])) for ml in valuesList if ml[0]] # converting to grades list
+        gradeCalculator = GradeCalculator()
+        gradeCalculator.setGradesList(gradesList)
         wx.MessageBox(str(gradeCalculator.getFinalGrade()), 'Your grade', wx.OK | wx.ICON_INFORMATION)
-
 
     def showPanelLogin(self):
         self.parent.SetTitle("Login")
