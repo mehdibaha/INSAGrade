@@ -1,14 +1,13 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-
 from sbbrowser import SubjectsBrowser
 from grades import GradeCalculator, Grade
 
 # Command line tool to calculate your grades
+targetURL = 'http://cipcnet.insa-lyon.fr/scol/cours_eleve'
 
-subjectsBrowser = SubjectsBrowser()
-subjectsBrowser.setUserAndPass(raw_input("Username? "), raw_input("Password? "))
-subjects = subjectsBrowser.getSubjects()
+subjectsBrowser = SubjectsBrowser(targetURL, raw_input("Username? "), raw_input("Password? "))
+subjects = subjectsBrowser.getResult()
 
 gradeCalculator = GradeCalculator()
 

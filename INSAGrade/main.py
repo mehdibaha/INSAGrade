@@ -4,7 +4,9 @@
 import wx
 from sbbrowser import SubjectsBrowser
 from grades import GradeCalculator, Grade
-from functools import partial 
+from functools import partial
+
+targetURL = 'http://cipcnet.insa-lyon.fr/scol/cours_eleve'
 
 # Main graphical interface
 class INSAGrade(wx.Frame):
@@ -60,9 +62,8 @@ class PanelGrades(wx.Panel):
     def initUI(self, username, password):
         try:
             if(username != "" and password != ""):
-                subjectsBrowser = SubjectsBrowser()
-                subjectsBrowser.setUserAndPass(username, password)
-                subjects = subjectsBrowser.getSubjects()
+                subjectsBrowser = SubjectsBrowser(targetURL, username, password)
+                subjects = subjectsBrowser.getResult()
                 for i,s in enumerate(subjects): # DO LIT OF TEXTCTRL
                     subjectName, subjectCoeff = s[0], s[1]
                     wx.StaticText(self, pos=(20, 20+30*i), label=subjectName)
