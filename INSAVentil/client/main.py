@@ -67,7 +67,7 @@ def periodicTask(lastsStats, statsMaurin, key):
     statsVentil = zip(*statsBrowser.getResult())
     if(lastStats != statsVentil):
         print "Begin drawing at " + str(datetime.datetime.now())
-        figTime = updateFigure(statsVentil, statsMaurin) # Send last printed graph
+        figTime = updateFigure(statsVentil, statsMaurin)
         sendImage(figTime, key)
         print "Send drawing at " + str(datetime.datetime.now())
         print ""
