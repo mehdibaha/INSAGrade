@@ -8,4 +8,5 @@ The result can be seen at the following link : http://cles-facil.fr/insa/ventil.
 
 # Stack
 Beautiful client written in Python (with love <3).
+
 Minimalistic server written in PHP (chosen for its simplicity, and because I only have a LAMP server) using MySQL.
