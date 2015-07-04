@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 import urllib2, urllib, base64
 import datetime, time
 
-# Parse stats from Official Note from School about available seats in each departments
+# Parse stats from official "local" school data about available seats in each major
 def getMaurin():
     statsMaurin = []
     subjects = []
@@ -20,10 +20,11 @@ def getMaurin():
 def processMaurin(statsMaurin, sumStudents):
     return [int(s*sumStudents/100) for s in statsMaurin]
 
+# Generates new plot based on available seats, and new data from website
 def updateFigure(statsVentil, statsMaurin):
     ys1 = statsVentil[0] # 1st vow
     ys2 = statsVentil[1] # 2nd vow
-    ys3 = processMaurin(statsMaurin, sum(statsVentil[0])) # Places available
+    ys3 = processMaurin(statsMaurin, sum(statsVentil[0])) # Seats available
 
     # Initial values for plotting
     N = len(statsMaurin)
@@ -62,7 +63,7 @@ def sendImage(figTime, key):
     req = urllib2.Request(apiURL, data)
     urllib2.urlopen(req)
 
-# Check for data and send it to server if it's new
+# Check then send data to server if it's new
 def periodicTask(lastsStats, statsMaurin, key):
     statsVentil = zip(*statsBrowser.getResult())
     if(lastStats != statsVentil):

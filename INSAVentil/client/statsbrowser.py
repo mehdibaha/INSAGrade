@@ -5,7 +5,7 @@ sys.path.insert(0,'../..')
 from basebrowser import BaseBrowser
 from bs4 import BeautifulSoup
 
-# Retrieves departments stats from the school's website
+# Retrieves majors stats from the school's website
 class StatsBrowser(BaseBrowser):
     # Parse html to get departments stats
     def resultFromHtml(self, result):
