@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-import os,sys,inspect
-sys.path.insert(0,os.path.dirname(os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))))
+import sys
+sys.path.insert(0,'../..')
 from basebrowser import BaseBrowser
 from bs4 import BeautifulSoup
 
