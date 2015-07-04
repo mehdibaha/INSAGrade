@@ -6,7 +6,9 @@ from grades import GradeCalculator, Grade
 # Command line tool to calculate your grades
 targetURL = 'http://cipcnet.insa-lyon.fr/scol/cours_eleve'
 
-subjectsBrowser = SubjectsBrowser(targetURL, raw_input("Username? "), raw_input("Password? "))
+username = raw_input("Username? ")
+password = raw_input("Password? ")
+subjectsBrowser = SubjectsBrowser(targetURL, username, password)
 subjects = subjectsBrowser.getResult()
 
 gradeCalculator = GradeCalculator()
